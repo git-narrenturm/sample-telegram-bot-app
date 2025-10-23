@@ -6,13 +6,22 @@ import { DEFAULT_RESPONSES } from '../config/bot.responses.js';
  * A wrapper for external lib to initialize and manage Telegram Bot instance
  */
 export class TelegramBotClient {
-  private readonly bot: TelegramBot;
+  private bot: TelegramBot;
 
   constructor(
     private readonly id: string,
     public readonly name: string,
     private readonly token: string,
   ) {
+    if (!id) {
+      throw new Error(`Failed to initialize bot: no id provided`);
+    }
+    if (!name) {
+      throw new Error(`Failed to initialize bot: no name provided`);
+    }
+    if (!name) {
+      throw new Error(`Failed to initialize bot: no token provided`);
+    }
     this.id = id;
     this.name = name;
     this.token = token;
@@ -20,8 +29,8 @@ export class TelegramBotClient {
   }
 
   public start(): void {
-    console.log(`Bot [${this.name}] starting`);
     this.bot.on('message', (msg) => this.handleMessage(msg));
+    console.log(`Bot [${this.name}] started`);
   }
 
   private async handleMessage(msg: TelegramBot.Message): Promise<void> {
