@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 
 import { BotConfig } from '../interfaces/bot-config.interface.js';
-import { TelegramBotClient } from '../entities/telegram-bot-client.entity.js';
+import { TelegramBotClient } from '../clients/telegram-bot.client.js';
 
 import { SendMessageDto } from '../dto/send-message.dto.js';
 
